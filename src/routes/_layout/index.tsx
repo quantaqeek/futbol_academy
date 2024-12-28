@@ -1,6 +1,7 @@
-import { Box, Container, Heading, Text } from "@chakra-ui/react";
+import { Container } from "@chakra-ui/react";
 import { createFileRoute } from "@tanstack/react-router";
-import { ColorModeButton, useColorMode, useColorModeValue } from "../../components/ui/color-mode";
+import HomeHero from "../../components/landing_page/hero"
+import { useColorMode } from "../../components/ui/color-mode";
 
 export const Route = createFileRoute("/_layout/")({
   component: Dashboard,
@@ -8,11 +9,6 @@ export const Route = createFileRoute("/_layout/")({
 
 function Dashboard() {
   const {colorMode} = useColorMode()
-    const textMain = useColorModeValue("secondary.800", "secondary.100");
-    const textPrimary = useColorModeValue("secondary.700", "secondary.200");
-    const textSecondary = useColorModeValue("secondary.600", "secondary.300");
-    const textTertiary = useColorModeValue("secondary.500", "secondary.400");
-    const textPrimaryRev = useColorModeValue("secondary.600", "secondary.700");
   return (
     <>
       <Container
@@ -28,12 +24,7 @@ function Dashboard() {
         // backgroundSize={"cover"}
         // backgroundRepeat={"no-repeat"}
       >
-        <Box pt={24} m={4} minH={"100vh"}>
-          <Text fontSize="2xl">Hi, 👋🏼</Text>
-          <Text>Welcome back, nice to see you again!</Text>
-          <ColorModeButton />
-          <Text>Where is this?</Text>
-        </Box>
+       <HomeHero/>
       </Container>
     </>
   );
