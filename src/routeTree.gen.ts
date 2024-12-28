@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as LayoutImport } from './routes/_layout'
 import { Route as LayoutIndexImport } from './routes/_layout/index'
+import { Route as LayoutGalleryIndexImport } from './routes/_layout/gallery/index'
 import { Route as LayoutAboutIndexImport } from './routes/_layout/about/index'
 
 // Create/Update Routes
@@ -25,6 +26,12 @@ const LayoutRoute = LayoutImport.update({
 const LayoutIndexRoute = LayoutIndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutGalleryIndexRoute = LayoutGalleryIndexImport.update({
+  id: '/gallery/',
+  path: '/gallery/',
   getParentRoute: () => LayoutRoute,
 } as any)
 
@@ -59,6 +66,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutAboutIndexImport
       parentRoute: typeof LayoutImport
     }
+    '/_layout/gallery/': {
+      id: '/_layout/gallery/'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof LayoutGalleryIndexImport
+      parentRoute: typeof LayoutImport
+    }
   }
 }
 
@@ -67,11 +81,13 @@ declare module '@tanstack/react-router' {
 interface LayoutRouteChildren {
   LayoutIndexRoute: typeof LayoutIndexRoute
   LayoutAboutIndexRoute: typeof LayoutAboutIndexRoute
+  LayoutGalleryIndexRoute: typeof LayoutGalleryIndexRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutIndexRoute: LayoutIndexRoute,
   LayoutAboutIndexRoute: LayoutAboutIndexRoute,
+  LayoutGalleryIndexRoute: LayoutGalleryIndexRoute,
 }
 
 const LayoutRouteWithChildren =
@@ -81,11 +97,13 @@ export interface FileRoutesByFullPath {
   '': typeof LayoutRouteWithChildren
   '/': typeof LayoutIndexRoute
   '/about': typeof LayoutAboutIndexRoute
+  '/gallery': typeof LayoutGalleryIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof LayoutIndexRoute
   '/about': typeof LayoutAboutIndexRoute
+  '/gallery': typeof LayoutGalleryIndexRoute
 }
 
 export interface FileRoutesById {
@@ -93,14 +111,20 @@ export interface FileRoutesById {
   '/_layout': typeof LayoutRouteWithChildren
   '/_layout/': typeof LayoutIndexRoute
   '/_layout/about/': typeof LayoutAboutIndexRoute
+  '/_layout/gallery/': typeof LayoutGalleryIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '' | '/' | '/about'
+  fullPaths: '' | '/' | '/about' | '/gallery'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about'
-  id: '__root__' | '/_layout' | '/_layout/' | '/_layout/about/'
+  to: '/' | '/about' | '/gallery'
+  id:
+    | '__root__'
+    | '/_layout'
+    | '/_layout/'
+    | '/_layout/about/'
+    | '/_layout/gallery/'
   fileRoutesById: FileRoutesById
 }
 
@@ -129,7 +153,8 @@ export const routeTree = rootRoute
       "filePath": "_layout.tsx",
       "children": [
         "/_layout/",
-        "/_layout/about/"
+        "/_layout/about/",
+        "/_layout/gallery/"
       ]
     },
     "/_layout/": {
@@ -138,6 +163,10 @@ export const routeTree = rootRoute
     },
     "/_layout/about/": {
       "filePath": "_layout/about/index.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/gallery/": {
+      "filePath": "_layout/gallery/index.tsx",
       "parent": "/_layout"
     }
   }
