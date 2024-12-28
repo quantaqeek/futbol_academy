@@ -1,10 +1,7 @@
-import React from "react";
 import {
   Box,
   Flex,
-  Heading,
   HStack,
-  IconButton,
   Text,
   useBreakpointValue,
   VStack,
@@ -13,23 +10,11 @@ import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { IoCloseOutline } from "react-icons/io5";
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { LuMenu } from "react-icons/lu";
 import {
   ColorModeButton,
   useColorMode,
   useColorModeValue,
 } from "../../components/ui/color-mode";
-import {
-  DrawerBackdrop,
-  DrawerBody,
-  DrawerCloseTrigger,
-  DrawerContent,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerRoot,
-  DrawerTitle,
-  DrawerTrigger,
-} from "../../components/ui/drawer";
 
 import NavItems from "./NavItems";
 import { Button } from "../../components/ui/button";
