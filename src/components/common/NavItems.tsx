@@ -11,55 +11,59 @@ import { useColorModeValue } from "../ui/color-mode";
 const navlist = [
   { icon: LuBookHeadphones, title: "Home", path: "/" },
   { icon: LuDatabase, title: "Dashboard", path: "/users" },
-  { icon: LuAlbum, title: "Albums", path: "/albums" },
-  { icon: LuCamera, title: "Photos", path: "/photos" },
+  { icon: LuAlbum, title: "About", path: "/about" },
+  { icon: LuCamera, title: "Gallery", path: "/gallery" },
 ];
 
 const NavItems = () => {
-  const bgActive = useColorModeValue("#B2FFFF", "#0093AF");
-
-  const hoverBg = useColorModeValue("#9195A2", "#B2FFFF");
-  const textHover = useColorModeValue("#D9F5F0", "#042749");
-  const navItems = navlist.map(({ icon: IconType, title, path }) => (
-    <ListItem
-      w={"full"}
-      key={title}
-	  overflow={"clip"}
-      _hover={{
-        base: { bg: hoverBg, color: textHover },
-        md: { borderBottom: "2px solid", bg: "none", color: textHover },
-      }}
-    >
-      <Link
-        to={path}
-        activeProps={{
-          style: {
-            color: bgActive,
-            fontWeight: "bold",
-          },
+  const textMain = useColorModeValue("secondary.800", "secondary.100");
+  const textSecondary = useColorModeValue("secondary.300", "fancy.400");
+  const linkHover = useColorModeValue("#c4c7f2", "#344d75");
+  const navItems = navlist.map(({ icon: IconType, title, path }) => {
+    return (
+      <Link to={path}>
+        {({ isActive }) => {
+          return (
+            <>
+              <ListItem
+                w={{ base: "", sm: "", md: "32", lg: "48" }}
+                key={title}
+                overflow={"clip"}
+                display={"flex"}
+                alignItems={"center"}
+                justifyContent={"center"}
+                clipPath={"polygon(20% 0, 100% 0, 80% 100%, 0 100%)"}
+                bg={isActive ? linkHover : textSecondary}
+                _hover={{
+                  md: { bg: linkHover },
+                }}
+              >
+                <Text
+                  display={"flex"}
+                  px={{ base: "6", md: "1" }}
+                  py={{ base: "6", md: "4" }}
+                  fontSize={{ base: "2xl", md: "md" }}
+                  color={isActive ? textMain : textMain}
+                  gap={2}
+                >
+                  <Box as={"span"} alignSelf={"center"}>
+                    <IconType />
+                  </Box>
+                  {title}
+                </Text>
+              </ListItem>
+            </>
+          );
         }}
-      >
-        <Text
-          display={"flex"}
-          p={{ base: "6", md: "0" }}
-          fontSize={{ base: "2xl", md: "md" }}
-          gap={2}
-        >
-          <Box as={"span"} alignSelf={"center"}>
-            <IconType />
-          </Box>
-          {title}
-        </Text>
       </Link>
-    </ListItem>
-  ));
+    );
+  });
   return (
     <ListRoot
       display={"flex"}
       listStyle={"none"}
       alignItems={"center"}
       justifyContent={"center"}
-      gap={{ base: 2, md: 6 }}
       flexDir={{ base: "column", md: "row" }}
     >
       {navItems}
