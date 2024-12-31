@@ -2,6 +2,8 @@ import { Container } from "@chakra-ui/react";
 import { createFileRoute } from "@tanstack/react-router";
 import HomeHero from "../../components/landing_page/hero"
 import { useColorMode } from "../../components/ui/color-mode";
+import Intro from "../../components/landing_page/Intro";
+import Insights from "../../components/landing_page/Insights";
 
 export const Route = createFileRoute("/_layout/")({
   component: Dashboard,
@@ -25,6 +27,8 @@ function Dashboard() {
         // backgroundRepeat={"no-repeat"}
       >
        <HomeHero/>
+       <Intro/>
+       <Insights/>
       </Container>
     </>
   );
