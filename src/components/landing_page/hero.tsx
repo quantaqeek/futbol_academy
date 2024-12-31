@@ -1,5 +1,6 @@
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import {
+  useColorMode,
   useColorModeValue,
 } from "../../components/ui/color-mode";
 import { Button } from "../ui/button";
@@ -9,6 +10,7 @@ const HomeHero = () => {
   const textMain = useColorModeValue("secondary.800", "secondary.100");
   const textSecondary = useColorModeValue("secondary.600", "secondary.300");
   const textPrimaryRev = useColorModeValue("secondary.600", "secondary.700");
+  const {colorMode} = useColorMode()
 
   const bg1 = useColorModeValue("fancy.300", "fancy.400");
   return (
@@ -19,6 +21,9 @@ const HomeHero = () => {
       display={"flex"}
       alignItems={"center"}
       justifyContent={"center"}
+      bgGradient="to-b"
+      gradientFrom={colorMode === 'light'? "secondary.100" : "secondary.700"}
+      gradientTo={colorMode === 'light'? "secondary.300" : "secondary.900"}
     >
       <Flex
         w={"100%"}
